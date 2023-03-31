@@ -1,0 +1,12 @@
+x = input("Enter a number: ");
+if(x == 0) {
+    print("x is zero");
+} elseif(x == 1) {
+    print("x is one");
+} else {
+    print("x is neither zero nor one");
+}
+
+for(i = 0; i < 5; i = i + 1) {
+    print(i);
+}
