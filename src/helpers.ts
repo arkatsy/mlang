@@ -26,6 +26,7 @@ export const CONSTANTS = Object.freeze({
   EOF: "EOF",
   AND: "&&",
   NOT: "!",
+  DOT: ".",
 });
 
 export const isNewline = (char: string) => char === CONSTANTS.NEWLINE;

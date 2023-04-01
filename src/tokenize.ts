@@ -56,9 +56,16 @@ export const tokenize = {
     let number = scanner.source[scanner.cursor];
     scanner.cursor++;
     let pseudoCursor = scanner.cursor;
-    while (isDigit(scanner.source[pseudoCursor])) {
+    let dots = 0;
+    while (isDigit(scanner.source[pseudoCursor]) || scanner.source[pseudoCursor] === CONSTANTS.DOT) {
+      if (scanner.source[pseudoCursor] === CONSTANTS.DOT) {
+        dots++;
+      }
       number += scanner.source[pseudoCursor];
       pseudoCursor++;
+    }
+    if (dots > 1) {
+      throw new SyntaxError("Invalid number");
     }
     scanner.cursor = pseudoCursor - 1;
     return {

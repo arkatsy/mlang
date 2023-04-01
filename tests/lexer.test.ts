@@ -62,6 +62,16 @@ describe("Lexer:", () => {
     ]);
   });
 
+  test("should tokenize numbers", () => {
+    expect(lexer(`100 2044 0.1 34.225`)).toStrictEqual([
+      { type: "number", value: "100" },
+      { type: "number", value: "2044" },
+      { type: "number", value: "0.1" },
+      { type: "number", value: "34.225" },
+      { type: "EOF", value: "EOF" },
+    ]);
+  });
+
   test("should tokenize expressions", () => {
     expect(
       lexer(`
@@ -110,7 +120,7 @@ describe("Lexer:", () => {
     expect(
       lexer(`
         STUFF = 100;
-
+        
         x = 1;
         y = 2;
         z = 5;
