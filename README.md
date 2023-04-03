@@ -18,11 +18,23 @@
 
 <array-assignment> ::= <identifier> "[" <expression> "]" "=" <expression> ";"
 
-<expression> ::= <term> ( "+" <term> | "-" <term> )*
+<expression> ::= <or-expression>
 
-<term> ::= <factor> ( "*" <factor> | "/" <factor> | "%" <factor> )*
+<or-expression> ::= <and-expression> ( "||" <and-expression> )*
 
-<factor> ::= <identifier> | <number> | <string> | <boolean> | <function-call> | "(" <expression> ")"
+<and-expression> ::= <not-expression> ( "&&" <not-expression> )*
+
+<not-expression> ::= "!" <comparison> | <comparison>
+
+<comparison> ::= <additive-expression> ( ( "==" | ">" | "<" | ">=" | "<=" ) <additive-expression> )*
+
+<additive-expression> ::= <multiplicative-expression> ( ( "+" | "-" ) <multiplicative-expression> )*
+
+<multiplicative-expression> ::= <unary-expression> ( ( "*" | "/" ) <unary-expression> )*
+
+<unary-expression> ::= ( "+" | "-" ) <primary-expression> | <primary-expression>
+
+<primary-expression> ::= <number> | <string> | <boolean> | <identifier> | "(" <expression> ")"
 
 <boolean> ::= "true" | "false"
 
