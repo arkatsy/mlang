@@ -17,7 +17,7 @@ import {
 } from "./helpers";
 import { Scanner, TokenType, Tokens, isEof } from "./lexer";
 
-function includes<T extends U, U>(array: ReadonlyArray<T>, element: U): element is T {
+export function includes<T extends U, U>(array: ReadonlyArray<T>, element: U): element is T {
   return array.includes(element as T);
 }
 

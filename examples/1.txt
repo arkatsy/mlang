@@ -1,15 +1,4 @@
-function add(x, y) {
-  return x + y;
-}
-
-function sub(x, y) {
-  return x - y;
-}
-
-e = 10.32;
-f = 20;
-
-s = add(e, f);
-t = sub(e, f);
-
-y = add(add(e, f + 1), sub(e - (2.3 * f + e), f));
+x = input("Input");
+print(x);
+x = input("Input2");
+str = "Hello";

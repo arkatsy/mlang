@@ -18,7 +18,7 @@
 
 <array-assignment> ::= <identifier> "[" <expression> "]" "=" <expression> ";"
 
-<expression> ::= <or-expression>
+<expression> ::= <or-expression> | <function-call>
 
 <or-expression> ::= <and-expression> ( "||" <and-expression> )*
 
@@ -40,7 +40,9 @@
 
 <function-definition> ::= "function" <identifier> "(" (<identifier> ("," <identifier>)*)? ")" "{" (<statement>)* "}"
 
-<function-call> ::= <identifier> "(" (<expression> ("," <expression>)*)? ")"
+<function-call> ::= <identifier> "(" (<arg> "," (<arg>)*)? ")"
+
+<arg> ::= <string> | <identifier> | <number> | <boolean>
 
 <if-statement> ::= "if" "(" <expression> ")" "{" (<statement>)* "}" ( "elseif" "(" <expression> ")" "{" (<statement>)* "}" )* ( "else" "{" (<statement>)* "}" )?
 

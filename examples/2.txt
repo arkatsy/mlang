@@ -1,12 +1,10 @@
-x = input("Enter a number: ");
-if(x == 0) {
-    print("x is zero");
-} elseif(x == 1) {
-    print("x is one");
-} else {
-    print("x is neither zero nor one");
-}
+add(1, 2);
+x = input("Enter a number: " 4);
 
-for(i = 0; i < 5; i = i + 1) {
-    print(i);
+if(x > 5) {
+    print("x is greater than 5");
+} elseif(x < 5) {
+    print("x is less than 5");
+} else {
+    print("x is equal to 5");
 }
