@@ -1,4 +1,10 @@
-x = input("Input");
-print(x);
-x = input("Input2");
-str = "Hello";
+if(x >= 5) {
+    x = 5;
+    y = 5.33;
+} elseif(x < 0) {
+    x = 0;
+} elseif(x == 0) {
+    x = x;
+}else {
+    x = x;
+}

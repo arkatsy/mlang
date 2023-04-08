@@ -6,13 +6,10 @@
 <program> ::= (<statement>)*
 
 <statement> ::= <variable-assignment>
-              | <array-assignment>
               | <expression>
               | <function-definition>
               | <function-call>
               | <if-statement>
-              | <for-loop>
-              | <while-loop>
 
 <variable-assignment> ::= <identifier> "=" <expression> ";"
 
@@ -45,10 +42,6 @@
 <arg> ::= <string> | <identifier> | <number> | <boolean>
 
 <if-statement> ::= "if" "(" <expression> ")" "{" (<statement>)* "}" ( "elseif" "(" <expression> ")" "{" (<statement>)* "}" )* ( "else" "{" (<statement>)* "}" )?
-
-<for-loop> ::= "for" "(" <variable-assignment> ";" <expression> ";" <expression> ")" "{" (<statement>)* "}"
-
-<while-loop> ::= "while" "(" <expression> ")" "{" (<statement>)* "}"
 
 <number> ::= ( "-" )? ( "0" | <digit-nonzero> <digit>* ) ( "." <digit>+ )?
 

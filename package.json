@@ -1,8 +1,7 @@
 {
   "name": "mini-programming-language",
   "scripts": {
-    "build": "rm -rf ./build && tsc -p ./tsconfig.json",
-    "run-lexer": "pnpm build && node build/index.js",
+    "build": "rm -rf ./build && tsc -p ./tsconfig.json && node build/index.js",
     "test": "pnpm build && jest"
   },
   "devDependencies": {
