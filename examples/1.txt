@@ -1,10 +1,10 @@
-if(x >= 5) {
-    x = 5;
-    y = 5.33;
-} elseif(x < 0) {
-    x = 0;
-} elseif(x == 0) {
-    x = x;
-}else {
-    x = x;
+function somefunc(x, y) {
+    z = x + y;
 }
+z = somefunc(3, 3);
+
+if(z == 6) {
+    somefunc("z is 6");
+}
+
+x = somefunc("test", 2);

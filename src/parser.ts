@@ -1,7 +1,7 @@
 import { CONSTANTS } from "./helpers";
 import { TokenType, Tokens } from "./lexer";
 
-const enum Definitions {
+export const enum Definitions {
   VariableAssignment = "VariableAssignment",
   FunctionCall = "FunctionCall",
   FunctionDeclaration = "FunctionDeclaration",
@@ -42,10 +42,21 @@ type IfStatement = {
   type: Definitions.IfStatement;
   condition: any;
   consequent: Statements[];
-  alternate: Statements[];
+  alternate: (ElseIfStatement | ElseStatement)[];
 };
 
-type AST = {
+type ElseIfStatement = {
+  type: Definitions.ElseIfStatement;
+  condition: any;
+  consequent: Statements[];
+};
+
+type ElseStatement = {
+  type: Definitions.ElseStatement;
+  body: Statements[];
+};
+
+export type AST = {
   type: "Program";
   body: Statements[];
 };
@@ -379,7 +390,7 @@ function parseIfStatement(tokens: Tokens): IfStatement {
 
   nextToken = tokenCheck(nextToken, TokenType.rightBrace, "Expected a '}' after the if body");
 
-  const alternate: any[] = [];
+  const alternate: (ElseIfStatement | ElseStatement)[] = [];
   nextToken = tokens.shift();
   while (nextToken && nextToken.value === CONSTANTS.KEYWORDS[5]) {
     tokenCheck(tokens.shift(), TokenType.leftParen, "Expected a '(' after the elseif keyword");
