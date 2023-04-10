@@ -1,28 +1,46 @@
 import { Definitions, type AST } from "./parser";
+import StdLib from "./stdlib";
+import { question } from "readline-sync";
 
-export const executeCode = (code: string) => new Function(code)();
+export const executeCode = (code: string) => new Function("input", code)(question);
 
 export function generateCode(ast: AST["body"]) {
   let code = "";
-  debugger;
+
   for (const node of ast) {
+    debugger;
     switch (node.type) {
       case Definitions.VariableAssignment: {
-        code += `let ${node.identifier} = `;
+        let temp = "";
+        temp += `let ${node.identifier} = `;
+
         if (node.expression.type === Definitions.FunctionCall) {
-          code += `${node.expression.callee}(${node.expression.args
-            .map((arg: any) => (arg.type === "string" ? '"' + arg.value + '"' : arg.value))
-            .toString()});\n`;
+          let args = node.expression.args.map((arg: any) =>
+            arg.type === "string" ? '"' + arg.value + '"' : arg.value
+          );
+          if (node.expression.callee === "input") {
+            temp = `${StdLib.input(args[0], node.identifier)}\n`;
+          } else {
+            temp += `${node.expression.callee}(${args.toString()});\n`;
+          }
         } else {
-          code += `${generateExpressionCode(node.expression)};\n`;
+          temp += `${generateExpressionCode(node.expression)};\n`;
         }
 
+        code += temp;
         break;
       }
       case Definitions.FunctionCall: {
-        code += `${node.callee}(${node.args
-          .map((arg: any) => (arg.type === "string" ? '"' + arg.value + '"' : arg.value))
-          .toString()});\n`;
+        let temp = "";
+        let args = node.args.map((arg: any) => (arg.type === "string" ? '"' + arg.value + '"' : arg.value));
+        temp += `${node.callee}(${args});\n`;
+        if (node.callee === "print") {
+          temp = `${StdLib.print(...args)}\n`;
+        } else if (node.callee === "input") {
+          temp = `${StdLib.input(args[0])}\n`;
+        }
+
+        code += temp;
         break;
       }
       case Definitions.FunctionDeclaration: {
@@ -75,7 +93,7 @@ function generateExpressionCode(expression: any): any {
       } ${generateExpressionCode(expression.right)}`;
     }
     case Definitions.AdditiveExpression: {
-      return `${generateExpressionCode(expression.left)} ${expression.operator} ${generateExpressionCode(
+      return `+${generateExpressionCode(expression.left)} ${expression.operator} +${generateExpressionCode(
         expression.right
       )}`;
     }
@@ -87,11 +105,14 @@ function generateExpressionCode(expression: any): any {
     case Definitions.UnaryExpression: {
       return `${expression.operator}${generateExpressionCode(expression.expression)}`;
     }
-    case "NumberLiteral" || "StringLiteral" || "BooleanLiteral": {
+    case "StringLiteral" || "BooleanLiteral": {
+      return expression.value;
+    }
+    case "NumberLiteral": {
       return expression.value;
     }
     case Definitions.FunctionCall: {
-      return `${expression.callee}(${expression.args.map((arg: any) => arg.value).toString()})`;
+      return generateCode(expression);
     }
     default: {
       if (expression.type === "Identifier") {
