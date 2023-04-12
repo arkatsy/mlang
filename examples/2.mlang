@@ -1,0 +1,13 @@
+x = input("Enter a number: ");
+t = input("Enter another number: ");
+
+function calc(x, t) {   
+    if (x / 2 * t) {
+        print("true");
+    } else {
+        print("false");
+    }
+}
+
+
+calc(x, t);
