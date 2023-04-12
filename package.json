@@ -1,9 +1,10 @@
 {
   "name": "mini-programming-language",
   "scripts": {
-    "build": "rm -rf ./build && tsc -p ./tsconfig.json && node build/index.js",
-    "only-build": "rm -rf ./build && tsc -p ./tsconfig.json",
-    "test": "pnpm build && jest"
+    "build:run": "rm -rf ./build && tsc -p ./tsconfig.json && node build/index.js",
+    "build": "rm -rf ./build && tsc -p ./tsconfig.json",
+    "test": "pnpm build && jest",
+    "build:pkg": "pnpm build && pkg build/index.js --target node18-macos-x64,node18-linux-x64,node18-win-x64 --output ./bin/mlang"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -17,6 +18,7 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "commander": "^10.0.0",
     "readline-sync": "^1.4.10"
   }
 }

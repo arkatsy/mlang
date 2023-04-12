@@ -1,0 +1,13 @@
+x = input("Enter a number: ");
+
+y = input("Enter a number: ");
+
+z = x * 2 / y;
+
+print("z is : ", z);
+
+if(z > 10) {
+    print("z is greater than 10");
+} else {
+    print("z is less than 10");
+}
