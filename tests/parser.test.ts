@@ -265,4 +265,129 @@ describe("Parser:", () => {
       ],
     });
   });
+
+  test("should parse a simple program 3", () => {
+    expect(
+      parser(
+        lexer(`
+    function add(a,b){
+      return a+b
+    }
+
+    add(1, 2);
+
+    x = "Hello";
+    y = "World";
+    z = 123;
+    d = add(z, 2);
+
+    print(x, y, z, d);
+    `)
+      )
+    ).toStrictEqual({
+      type: "Program",
+      body: [
+        {
+          type: "FunctionDeclaration",
+          name: "add",
+          params: ["a", "b"],
+          body: [
+            {
+              type: "ReturnStatement",
+              expression: {
+                type: "AdditiveExpression",
+                operator: "+",
+                left: {
+                  type: "Identifier",
+                  name: "a",
+                },
+                right: {
+                  type: "Identifier",
+                  name: "b",
+                },
+              },
+            },
+          ],
+        },
+        {
+          type: "FunctionCall",
+          callee: "add",
+          args: [
+            {
+              type: "number",
+              value: "1",
+            },
+            {
+              type: "number",
+              value: "2",
+            },
+          ],
+        },
+        {
+          type: "VariableAssignment",
+          identifier: "x",
+          expression: {
+            type: "StringLiteral",
+            value: "Hello",
+          },
+        },
+        {
+          type: "VariableAssignment",
+          identifier: "y",
+          expression: {
+            type: "StringLiteral",
+            value: "World",
+          },
+        },
+        {
+          type: "VariableAssignment",
+          identifier: "z",
+          expression: {
+            type: "NumberLiteral",
+            value: "123",
+          },
+        },
+        {
+          type: "VariableAssignment",
+          identifier: "d",
+          expression: {
+            type: "FunctionCall",
+            callee: "add",
+            args: [
+              {
+                type: "identifier",
+                value: "z",
+              },
+              {
+                type: "number",
+                value: "2",
+              },
+            ],
+          },
+        },
+        {
+          type: "FunctionCall",
+          callee: "print",
+          args: [
+            {
+              type: "identifier",
+              value: "x",
+            },
+            {
+              type: "identifier",
+              value: "y",
+            },
+            {
+              type: "identifier",
+              value: "z",
+            },
+            {
+              type: "identifier",
+              value: "d",
+            },
+          ],
+        },
+      ],
+    });
+  });
 });
