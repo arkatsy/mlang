@@ -47,8 +47,6 @@ Of course you can compile the binary yourself with `pnpm build:pkg` (only on uni
 
 <variable-assignment> ::= <identifier> "=" <expression> ";"
 
-<array-assignment> ::= <identifier> "[" <expression> "]" "=" <expression> ";"
-
 <expression> ::= <or-expression> | <function-call>
 
 <or-expression> ::= <and-expression> ( "||" <and-expression> )*
