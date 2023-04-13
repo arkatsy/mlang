@@ -20,7 +20,6 @@ const source = fs.readFileSync(args[0], "utf-8");
 
 const lexerResult = lexer(source);
 const parserResult = parser([...lexerResult]);
-
 for (const option in options) {
   switch (option) {
     case "tokens": {

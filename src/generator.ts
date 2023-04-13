@@ -8,7 +8,6 @@ export function generateCode(ast: AST["body"]) {
   let code = "";
 
   for (const node of ast) {
-    debugger;
     switch (node.type) {
       case Definitions.VariableAssignment: {
         let temp = "";
@@ -67,6 +66,10 @@ export function generateCode(ast: AST["body"]) {
         }
         break;
       }
+      case Definitions.ReturnStatement: {
+        code += `return ${generateExpressionCode(node.expression)};\n`;
+        break;
+      }
       default: {
         throw new Error("Unknown node type");
       }
@@ -105,7 +108,10 @@ function generateExpressionCode(expression: any): any {
     case Definitions.UnaryExpression: {
       return `${expression.operator}${generateExpressionCode(expression.expression)}`;
     }
-    case "StringLiteral" || "BooleanLiteral": {
+    case "StringLiteral": {
+      return `"${expression.value}"`;
+    }
+    case "BooleanLiteral": {
       return expression.value;
     }
     case "NumberLiteral": {

@@ -15,9 +15,10 @@ export const enum Definitions {
   AdditiveExpression = "AdditiveExpression",
   MultiplicativeExpression = "MultiplicativeExpression",
   UnaryExpression = "UnaryExpression",
+  ReturnStatement = "ReturnStatement",
 }
 
-type Statements = VariableAssignment | FunctionCall | FunctionDeclaration | IfStatement;
+type Statements = VariableAssignment | FunctionCall | FunctionDeclaration | IfStatement | ReturnStatement;
 
 type FunctionCall = {
   type: Definitions.FunctionCall;
@@ -54,6 +55,11 @@ type ElseIfStatement = {
 type ElseStatement = {
   type: Definitions.ElseStatement;
   body: Statements[];
+};
+
+type ReturnStatement = {
+  type: Definitions.ReturnStatement;
+  expression: any;
 };
 
 export type AST = {
@@ -103,6 +109,8 @@ function parseStatement(tokens: Tokens): Statements {
         return parseFunctionDefinition(tokens);
       case CONSTANTS.KEYWORDS[0]: // if
         return parseIfStatement(tokens);
+      case CONSTANTS.KEYWORDS[4]: // return
+        return parseReturnStatement(tokens);
       default:
         throw new Error("Unexpected keyword");
     }
@@ -453,5 +461,13 @@ function parseIfStatement(tokens: Tokens): IfStatement {
     condition,
     consequent,
     alternate,
+  };
+}
+
+function parseReturnStatement(tokens: Tokens): ReturnStatement {
+  const expression = parseExpression(tokens);
+  return {
+    type: Definitions.ReturnStatement,
+    expression,
   };
 }
