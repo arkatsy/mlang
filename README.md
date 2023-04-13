@@ -28,7 +28,7 @@ print(result);
 - `-t [file]` or `--tokens [file]` : Prints the tokens from the output of the lexer (if you provide a file, the output will be saved there in json format).
 - `-a [file]` or `--ast [file]`: Prints the ast from the output of the parser (if you provide a file, the output will be saved there in json format).
 
-If you are on windows and you don't use the binary, you can compile the typescript yourself with `npx tsc` and then run node with the build you created or 
+If you are on windows you can do all of the above with WSL if you use it else if you don't use the binary, you can compile the typescript yourself with `npx tsc` and then run node with the build you created or 
 you can run `npx ts-node ./index.ts <source_filename>.mlang` to compile and run everything immediately.
 
 Of course you can compile the binary yourself with `pnpm build:pkg` (only on unix / unix like, on windows compile the typescript first `npx tsc` and then `npx pkg build/index.js --target node18-macos-x64,node18-linux-x64,node18-win-x64 --output ./bin/mlang`).
