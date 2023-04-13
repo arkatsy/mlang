@@ -1,0 +1,12 @@
+function add(a,b){
+    return a+b
+}
+
+add(1, 2);
+
+x = "Hello";
+y = "World";
+z = 123;
+d = add(z, 2);
+
+print(x, y, z, d);
