@@ -7,6 +7,22 @@ One of the hardest parts was the expression parsing. The expressions except when
 
 For example parsing comparisons between identifiers which are number literals will result in comparison between strings. Of course I could convert them into numbers when I generate the js code but because I approached it in this very naive way I'd have to patch every edge case which would result in a very frustrated unreadable mess. Also as I said the goal was to learn more about lexing and parsing and not to create a "proper" programming language.
 
+Example syntax: 
+```js
+x = input("Enter a number");
+y = input("Enter another number");
+
+function add(x, y) {
+  return x + y;
+}
+
+result = add(x, y);
+print(result);
+
+```
+
+*`input()` and `print()` are the native methods that I provide. You can probably guess what they do.*
+
 ---
 #### Cli flags you can provide to the binary or by running `pnpm build:run` for unix systems or unix like: 
 - `-t [file]` or `--tokens [file]` : Prints the tokens from the output of the lexer (if you provide a file, the output will be saved there in json format).
