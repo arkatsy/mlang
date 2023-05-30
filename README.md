@@ -1,11 +1,11 @@
 # **Mlang**
 Mlang is my attempt to create a mini programming language just for fun and to learn more about lexing and parsing.
 
-More correct wording would be to say this is a transpiler for my mini programming language (since I ended up generating js code and package the whole node environment into the binary).
+More correct wording would be to say this is a transpiler for my mini programming language (since at the end I generated js code and included the whole node environment in the binary).
 
 One of the hardest parts was the expression parsing. The expressions except when they are actual literals and we are comparing strings are either not parsed correctly or the generated js code is not correct.
 
-For example parsing comparisons between identifiers which are number literals will result in comparison between strings. Of course I could convert them into numbers when I generate the js code but because I approached it in this very naive way I'd have to patch every edge case which would result in a very frustrated unreadable mess. Also as I said the goal was to learn more about lexing and parsing and not to create a "proper" programming language.
+For example parsing comparisons between identifiers that are number literals will result in comparison between strings. Of course I can convert them into numbers when I generate the js code but because I approached it in this very naive way I'd have to patch every edge case which would result in a very frustrated unreadable mess. Also as I said the goal was to learn more about lexing and parsing and not to create a "proper" programming language.
 
 Example syntax: 
 ```js
